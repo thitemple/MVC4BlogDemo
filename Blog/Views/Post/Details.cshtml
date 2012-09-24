@@ -1,0 +1,53 @@
+﻿@model Blog.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundle/jquery")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(":submit").on('click', function (event) {
+                event.stopImmediatePropagation();
+                var form = $(this).closest('form');
+                $.ajax({
+                    url: '/api/Comentario',
+                    type: 'POST',
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function (comentario) {
+                        $("div.comentario").last().after("<div class='comentario'>" + comentario.Texto + "</div>");
+                        form[0].reset();
+                    }
+                });
+                return false;
+            });
+        })
+    </script>
+}
+
+@Html.DisplayFor(model => model)
+
+<div id="comentarios">
+    <p>Comentários:</p>
+    @foreach (var comentario in Model.Comentarios)
+    {
+        <div class="comentario">
+            @comentario.Texto
+        </div>
+    }
+    @using (Html.BeginForm("Create", "Comentario", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.PostId)
+        @Html.Partial("_CreateComentario", new Blog.Models.Comentario())
+
+        <input type="submit" value="Adicionar Comentario">
+    }
+
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

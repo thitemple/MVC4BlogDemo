@@ -1,0 +1,22 @@
+﻿@model Blog.Models.Comentario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Comentario</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Texto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Texto)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ComentarioId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,9 @@
+﻿@model Blog.Models.Post
+
+<article>
+    <header>@Html.ActionLink(Model.Titulo, "Details", new {id = Model.PostId})</header>
+        @Model.Corpo
+    <footer>
+        @Html.ActionLink("Edit", "Edit", new { id=Model.PostId })
+    </footer>
+</article>

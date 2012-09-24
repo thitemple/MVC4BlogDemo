@@ -1,0 +1,11 @@
+﻿@model Blog.Models.Comentario
+
+<div>
+     <div class="editor-label">
+          @Html.LabelFor(model => model.Texto)
+     </div>
+     <div class="editor-field">
+          @Html.TextAreaFor(model => model.Texto)
+          @Html.ValidationMessageFor(model => model.Texto)
+     </div>
+</div>
